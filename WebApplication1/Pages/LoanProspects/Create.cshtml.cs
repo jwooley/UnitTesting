@@ -37,10 +37,8 @@ namespace WebApplication1.Pages.LoanProspects
                 return Page();
             }
 
-            var nameParts = LoanProspect.Name.Split(" ");
-            LoanProspect.NameFirst = nameParts[0];
-            LoanProspect.NameLast = nameParts[1];
-            LoanProspect.Payment = -1 * Microsoft.VisualBasic.Financial.Pmt(LoanProspect.InterestRate / 1200.0, LoanProspect.TermMonths, LoanProspect.LoanAmount, 0);
+            LoanProspect.ParseName();
+            LoanProspect.ComputePayment();
 
             ViewData["confirmation"] = $"Loan Payment for {LoanProspect.NameFirst} is {LoanProspect.Payment:c2}";
 
@@ -58,7 +56,7 @@ namespace WebApplication1.Pages.LoanProspects
                 context.LoanProspect.Add(LoanProspect);
                 try
                 {
-                   await context.SaveChangesAsync();
+                    await context.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {
@@ -71,5 +69,7 @@ namespace WebApplication1.Pages.LoanProspects
             }
             return Page();
         }
+
+
     }
 }
