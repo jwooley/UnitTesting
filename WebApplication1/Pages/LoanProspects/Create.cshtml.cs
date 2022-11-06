@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Net.Mail;
 using WebApplication1.Data;
 using WebApplication1.Models;
 using WebApplication1.Services;
@@ -28,6 +27,8 @@ namespace WebApplication1.Pages.LoanProspects
         [BindProperty]
         public LoanProspect LoanProspect { get; set; }
 
+        [BindProperty]
+        public string Confirmation { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -42,7 +43,7 @@ namespace WebApplication1.Pages.LoanProspects
             LoanProspect.NameLast = nameParts[1];
             LoanProspect.Payment = -1 * Microsoft.VisualBasic.Financial.Pmt(LoanProspect.InterestRate / 1200.0, LoanProspect.TermMonths, LoanProspect.LoanAmount, 0);
 
-            ViewData["confirmation"] = $"Loan Payment for {LoanProspect.NameFirst} is {LoanProspect.Payment:c2}";
+            Confirmation = $"Loan Payment for {LoanProspect.NameFirst} is {LoanProspect.Payment:c2}";
 
             if (LoanProspect.IsSave)
             {
@@ -63,7 +64,7 @@ namespace WebApplication1.Pages.LoanProspects
                 catch (Exception ex)
                 {
                     _logger.LogError("Error saving", ex);
-                    ViewData["confirmation"] = "Error saving";
+                    Confirmation = "Error saving";
                     return Page();
                 }
 
