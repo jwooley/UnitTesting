@@ -1,0 +1,55 @@
+﻿@page
+@model WebApplication1.Pages.LoanProspects.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LoanProspect[0].NameLast)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoanProspect[0].NameFirst)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoanProspect[0].LoanAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoanProspect[0].Payment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.LoanProspect) {
+        <tr>
+            <td>
+                @item.NameLast
+            </td>
+            <td>
+                @item.NameFirst
+            </td>
+            <td>
+                @item.LoanAmount.ToString("c2")
+            </td>
+            <td>
+                @item.Payment.ToString("c2")
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
