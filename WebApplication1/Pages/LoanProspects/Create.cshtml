@@ -39,7 +39,7 @@
                 <input asp-for="LoanProspect.TermMonths" class="form-control" />
                 <span asp-validation-for="LoanProspect.TermMonths" class="text-danger"></span>
             </div>
-            <h3>@ViewData["confirmation"]</h3>
+            <h3>@this.Model.Confirmation</h3>
             <div class="form-group">
                 @Html.EditorFor(model => model.LoanProspect.IsSave)
                 <label asp-for="LoanProspect.IsSave" class="control-label"></label>
