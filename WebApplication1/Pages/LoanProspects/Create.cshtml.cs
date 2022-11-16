@@ -10,13 +10,13 @@ namespace WebApplication1.Pages.LoanProspects
     [Authorize]
     public class CreateModel : PageModel
     {
-        private ApplicationDbContext _context;
         private ILogger _logger;
+        private ApplicationDbContext _context;
 
-        public CreateModel(ApplicationDbContext context, ILogger<CreateModel> logger)
+        public CreateModel(ILogger<CreateModel> logger, ApplicationDbContext context)
         {
-            _context = context;
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult OnGet()
@@ -30,7 +30,6 @@ namespace WebApplication1.Pages.LoanProspects
         [BindProperty]
         public string Confirmation { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -55,11 +54,10 @@ namespace WebApplication1.Pages.LoanProspects
                        at a rate of {LoanProspect.InterestRate}%
                        """);
                 }
-                using var context = new Data.ApplicationDbContext();
-                context.LoanProspect.Add(LoanProspect);
+                _context.LoanProspect.Add(LoanProspect);
                 try
                 {
-                   await context.SaveChangesAsync();
+                   await _context.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {
