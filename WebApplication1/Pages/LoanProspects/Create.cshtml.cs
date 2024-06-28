@@ -11,12 +11,10 @@ namespace WebApplication1.Pages.LoanProspects
     public class CreateModel : PageModel
     {
         private ILogger _logger;
-        private ApplicationDbContext _context;
 
-        public CreateModel(ILogger<CreateModel> logger, ApplicationDbContext context)
+        public CreateModel(ILogger<CreateModel> logger)
         {
             _logger = logger;
-            _context = context;
         }
 
         public IActionResult OnGet()
@@ -54,10 +52,11 @@ namespace WebApplication1.Pages.LoanProspects
                        at a rate of {LoanProspect.InterestRate}%
                        """);
                 }
-                _context.LoanProspect.Add(LoanProspect);
+                using var context = new ApplicationDbContext();
+                context.LoanProspect.Add(LoanProspect);
                 try
                 {
-                   await _context.SaveChangesAsync();
+                   await context.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {
