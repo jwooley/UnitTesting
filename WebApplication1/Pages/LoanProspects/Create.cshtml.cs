@@ -10,16 +10,16 @@ namespace WebApplication1.Pages.LoanProspects
     [Authorize]
     public class CreateModel : PageModel
     {
-        private ApplicationDbContext _context;
         private ILogger _logger;
+        ApplicationDbContext _context;
         private IEmailSender _emailSender;
 
         public CreateModel(ApplicationDbContext context,
             ILogger<CreateModel> logger,
             IEmailSender emailSender)
         {
-            _context = context;
             _logger = logger;
+            _context = context;
             _emailSender = emailSender;
         }
 
@@ -34,7 +34,6 @@ namespace WebApplication1.Pages.LoanProspects
         [BindProperty]
         public string Confirmation { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

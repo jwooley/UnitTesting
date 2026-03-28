@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
-[assembly: InternalsVisibleTo("TestProject1")]
+
 namespace WebApplication1.Models
 {
     public class LoanProspect
@@ -26,7 +25,7 @@ namespace WebApplication1.Models
                 NameLast = string.Empty;
             }
             else
-            { 
+            {
                 Span<string> nameParts = Name.Split(" ");
                 if (nameParts.Length == 1)
                 {
@@ -46,10 +45,10 @@ namespace WebApplication1.Models
                 NameFirst = temp;
             }
         }
-
-        internal void ComputePayment()
+        public void ComputePayment()
         {
             Payment = -1 * Microsoft.VisualBasic.Financial.Pmt(InterestRate / 1200.0, TermMonths, LoanAmount, 0);
         }
+
     }
 }
