@@ -29,13 +29,13 @@ public class LoanProspectsTests : IAsyncLifetime
         _playwright = playwright;
     }
 
-    public async Task InitializeAsync()
+    public async ValueTask InitializeAsync()
     {
         _context = await _playwright.NewContextAsync();
         _page = await _context.NewPageAsync();
     }
 
-    public async Task DisposeAsync()
+    public async ValueTask DisposeAsync()
     {
         await _context.DisposeAsync();
     }
