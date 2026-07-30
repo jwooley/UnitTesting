@@ -7,8 +7,7 @@ namespace WebApplication1.E2ETests;
 ///   E2E_TEST_PASS  — default: Test@123456
 ///
 /// REQUIREMENTS before running tests:
-///   1. Start the WebApplication1 project (dotnet run or F5).
-///   2. Ensure a confirmed Identity user exists with the credentials below.
+///   1. Ensure a confirmed Identity user exists with the credentials below.
 ///      You can register via /Identity/Account/Register, then confirm via the
 ///      link printed to the dev console (when using the dev SMTP stub).
 /// </summary>

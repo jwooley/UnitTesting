@@ -13,7 +13,6 @@ namespace WebApplication1.E2ETests;
 /// so tests do not share authenticated state.
 ///
 /// Prerequisites:
-///   • WebApplication1 must be running at TestConfiguration.BaseUrl.
 ///   • A confirmed Identity user must exist with TestConfiguration.TestEmail /
 ///     TestConfiguration.TestPassword (see TestConfiguration.cs).
 /// </summary>
